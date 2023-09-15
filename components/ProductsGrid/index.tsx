@@ -1,25 +1,23 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 
 import ProductCard from "@/components/ProductsGrid/ProductCard";
-import { useQuery } from "@tanstack/react-query";
-import { Product } from "@/utils/types";
-import Loading from "../Loading";
+import Loading from "@/components/Loading";
 
-async function getProducts() {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const products = await res.json();
-  return products;
-}
+import { Product } from "@/utils/types";
+import { getProducts } from "@/utils/getProducts";
 
 function ProductList() {
-  const { data, isLoading, isFetching, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
 
   if (isLoading) return <Loading />;
+
+  if (error) return <h4>Something went wrong...</h4>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-4">

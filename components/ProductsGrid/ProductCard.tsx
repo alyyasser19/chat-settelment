@@ -24,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
       <Image
-        className="h-52 w-full object-cover object-top"
+        className="h-52 w-full object-cover object-top aspect-square"
         src={image}
         alt={title}
         height={320}
